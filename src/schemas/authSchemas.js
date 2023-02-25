@@ -12,4 +12,15 @@ export const userSchema = joi.object({
 }).messages(
     {"string.base": "todos os campos devem estar em formato de texto"},
     {"string.empty": "todos os campos devem estar preenchidos"}
-    );
+);
+
+
+export const loginSchema = joi.object({
+    email: joi.string().email().required().messages(
+        {"string.email": "o campo e-mail deve conter um e-mail válido"},
+    ),
+    password: joi.string().required(),
+  }).messages(
+    {"string.base": "todos os campos devem estar em formato de texto"},
+    {"string.empty": "todos os campos devem estar preenchidos"}
+); 
