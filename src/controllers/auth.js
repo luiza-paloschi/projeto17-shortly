@@ -45,3 +45,35 @@ export async function signIn(_, res){
     res.status(500).send('Algo deu errado');
   }
 }
+
+export async function getUser(_, res){
+    
+  const user = res.locals.session
+  
+  try {
+     
+      const query= await db.query(
+      `SELECT users.id, users.name, CAST(COALESCE(SUM(urls."visitCount"), 0) AS INTEGER) as "visitCount",
+      CASE
+        WHEN COUNT(urls.id) = 0 THEN json_build_array()
+        ELSE json_agg(
+          json_build_object(
+            'id', urls.id,
+            'shortUrl', urls."shortUrl",
+            'url', urls.url,
+            'visitCount', urls."visitCount"
+          )
+        )
+      END as "shortenedUrls"
+    FROM users
+    LEFT JOIN urls ON users.id = urls."userId"
+    WHERE users.id = $1
+    GROUP BY users.id;`, [user.userId]);
+     
+      res.status(200).send(query.rows[0]);
+
+  } catch (error) {
+  console.error(error)
+  res.status(500).send(error)
+  }
+}
