@@ -40,3 +40,45 @@ export async function getUrlById(req, res){
     res.status(500).send(error)
   }
 }
+
+export async function getUrlByShort(req, res){
+    
+    const {shortUrl} = req.params
+
+    try {
+       
+        const response = await db.query('SELECT * FROM urls WHERE "shortUrl"=$1', [shortUrl]);
+        if (response.rowCount === 0) return res.sendStatus(404);
+
+        await db.query('UPDATE urls SET "visitCount"=$1 WHERE id=$2;', [(response.rows[0].visitCount + 1), response.rows[0].id])
+        
+        res.redirect(response.rows[0].url)
+
+    } catch (error) {
+    console.error(error)
+    res.status(500).send(error)
+  }
+}
+
+export async function deleteUrl(req, res){
+    
+    const {id} = req.params
+    const user = res.locals.session
+    try {
+       
+        const query= await db.query('SELECT * FROM urls WHERE id=$1', [id]);
+        if (query.rowCount === 0) return res.sendStatus(404);
+
+        
+        if (user.id !== query.rows[0].userId) return res.sendStatus(401);
+
+       
+        await db.query('DELETE FROM urls WHERE id=$1;', [id])
+     
+        res.sendStatus(204);
+
+    } catch (error) {
+    console.error(error)
+    res.status(500).send(error)
+  }
+}
