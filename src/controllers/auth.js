@@ -48,7 +48,7 @@ export async function signIn(_, res){
 
 export async function getUser(_, res){
     
-  const user = res.locals.session
+  const user = res.locals.session;
   
   try {
      

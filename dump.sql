@@ -146,13 +146,12 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 INSERT INTO public.sessions VALUES (1, 1, 'afbaa68d-40da-4e16-8dc9-4c4c7c19eb2e', '2023-02-25 15:12:50.002048');
 INSERT INTO public.sessions VALUES (2, 2, 'b32083d7-bda7-4a9e-b356-321e7d7b036b', '2023-02-25 16:06:38.070911');
+INSERT INTO public.sessions VALUES (3, 3, '6190ca1f-07b4-4b08-82fd-05502d4ef2c2', '2023-02-25 20:43:33.603272');
 
 
 --
 -- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: -
 --
-
-INSERT INTO public.urls VALUES (2, 1, 'https://www.friv.com/', '-vpMz7le', 0, '2023-02-25 16:12:03.610257');
 
 
 
@@ -162,27 +161,28 @@ INSERT INTO public.urls VALUES (2, 1, 'https://www.friv.com/', '-vpMz7le', 0, '2
 
 INSERT INTO public.users VALUES (1, 'João', 'joao@driven.com.br', '$2b$10$vJWh4ZuEz2ZtQvannkZPDOBU0oFwJlsJ1kvfnUywv7bsJp7B4ZFJm', '2023-02-25 15:12:45.01832');
 INSERT INTO public.users VALUES (2, 'Maria', 'maria@driven.com.br', '$2b$10$a8PLdzfmNw0bhZcNhvXpdu4G8cWosk/ZOPRW6tMkuH8Ap.otE10yS', '2023-02-25 16:06:28.94669');
+INSERT INTO public.users VALUES (3, 'Pedro', 'pedroo@driven.com.br', '$2b$10$WeQDhAMOfLzCwwSZuS3vjuiBVOjE8pqZZwSR6I/wMXNbCrgk7fjWO', '2023-02-25 20:43:04.256958');
 
 
 --
 -- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.sessions_id_seq', 2, true);
+SELECT pg_catalog.setval('public.sessions_id_seq', 3, true);
 
 
 --
 -- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.urls_id_seq', 3, true);
+SELECT pg_catalog.setval('public.urls_id_seq', 1, false);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 2, true);
+SELECT pg_catalog.setval('public.users_id_seq', 3, true);
 
 
 --
@@ -199,14 +199,6 @@ ALTER TABLE ONLY public.sessions
 
 ALTER TABLE ONLY public.urls
     ADD CONSTRAINT urls_pkey PRIMARY KEY (id);
-
-
---
--- Name: urls urls_url_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.urls
-    ADD CONSTRAINT urls_url_key UNIQUE (url);
 
 
 --
