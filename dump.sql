@@ -153,7 +153,7 @@ INSERT INTO public.sessions VALUES (2, 2, 'b32083d7-bda7-4a9e-b356-321e7d7b036b'
 --
 
 INSERT INTO public.urls VALUES (2, 1, 'https://www.friv.com/', '-vpMz7le', 0, '2023-02-25 16:12:03.610257');
-INSERT INTO public.urls VALUES (3, 1, 'https://www.google.com/', 'fmrOjkOk', 0, '2023-02-25 16:14:21.232746');
+
 
 
 --
